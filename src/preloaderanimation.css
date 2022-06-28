@@ -1,0 +1,164 @@
+.FullScreen {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0px;
+}
+
+.PreImageWrapper {
+  width: 50%;
+  height: auto;
+}
+
+.AnimationWrapper {
+  position: absolute;
+  width: auto;
+  height: auto;
+  bottom: 60px;
+  display: flex;
+  gap: 5px;
+}
+
+.Dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+}
+
+.first {
+  animation: dotfirst;
+  animation-duration: 4s;
+  background-color: rgba(17, 48, 66, 0.2);
+}
+
+.second {
+  animation: dotsecond;
+  animation-duration: 4s;
+  background-color: rgba(17, 48, 66, 0.2);
+}
+
+.third {
+  animation: dotthird;
+  animation-duration: 4s;
+  background-color: rgba(17, 48, 66, 0.2);
+}
+
+.fourth {
+  animation: dotfourth;
+  animation-duration: 4s;
+  background-color: rgba(17, 48, 66, 0.2);
+}
+
+.fifth {
+  animation: dotfifth;
+  animation-duration: 4s;
+  background-color: rgba(17, 48, 66, 0.2);
+}
+
+@keyframes dotfirst {
+  0% {
+    background-color: rgba(17, 48, 66, 0.2);
+  }
+  20% {
+    background-color: rgba(17, 48, 66, 1);
+  }
+  40% {
+    background-color: rgba(17, 48, 66, 1);
+  }
+  60% {
+    background-color: rgba(17, 48, 66, 1);
+  }
+  80% {
+    background-color: rgba(17, 48, 66, 1);
+  }
+  100% {
+    background-color: rgba(17, 48, 66, 1);
+  }
+}
+
+@keyframes dotsecond {
+  0% {
+    background-color: rgba(17, 48, 66, 0.2);
+  }
+  20% {
+    background-color: rgba(17, 48, 66, 0.2);
+  }
+  40% {
+    background-color: rgba(17, 48, 66, 1);
+  }
+  60% {
+    background-color: rgba(17, 48, 66, 1);
+  }
+  80% {
+    background-color: rgba(17, 48, 66, 1);
+  }
+  100% {
+    background-color: rgba(17, 48, 66, 1);
+  }
+}
+
+@keyframes dotthird {
+  0% {
+    background-color: rgba(17, 48, 66, 0.2);
+  }
+  20% {
+    background-color: rgba(17, 48, 66, 0.2);
+  }
+  40% {
+    background-color: rgba(17, 48, 66, 0.2);
+  }
+  60% {
+    background-color: rgba(17, 48, 66, 1);
+  }
+  80% {
+    background-color: rgba(17, 48, 66, 1);
+  }
+  100% {
+    background-color: rgba(17, 48, 66, 1);
+  }
+}
+
+@keyframes dotfourth {
+  0% {
+    background-color: rgba(17, 48, 66, 0.2);
+  }
+  20% {
+    background-color: rgba(17, 48, 66, 0.2);
+  }
+  40% {
+    background-color: rgba(17, 48, 66, 0.2);
+  }
+  60% {
+    background-color: rgba(17, 48, 66, 0.2);
+  }
+  80% {
+    background-color: rgba(17, 48, 66, 1);
+  }
+  100% {
+    background-color: rgba(17, 48, 66, 1);
+  }
+}
+
+@keyframes dotfifth {
+  0% {
+    background-color: rgba(17, 48, 66, 0.2);
+  }
+  20% {
+    background-color: rgba(17, 48, 66, 0.2);
+  }
+  40% {
+    background-color: rgba(17, 48, 66, 0.2);
+  }
+  60% {
+    background-color: rgba(17, 48, 66, 0.2);
+  }
+  80% {
+    background-color: rgba(17, 48, 66, 0.2);
+  }
+  100% {
+    background-color: rgba(17, 48, 66, 1);
+  }
+}
