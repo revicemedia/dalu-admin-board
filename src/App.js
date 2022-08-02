@@ -112,6 +112,8 @@ function App() {
     localStorage.setItem("userIsAdmin", data[0].userIsAdmin);
   }
 
+  console.log(userIsLoggedIn);
+
   return (
     <div className="root-wrapper">
       {activeUser ? (

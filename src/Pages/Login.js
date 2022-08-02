@@ -30,6 +30,8 @@ function Login({ onLoginSuccess }) {
     setPasswordValue(e.target.value);
   }
 
+  console.log(activeUser);
+
   function tryLogin(e) {
     e.preventDefault();
     const loginEmail = emailValue;
