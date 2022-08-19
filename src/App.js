@@ -31,7 +31,7 @@ function App() {
   };
 
   const onLogoutClick = () => {
-    setActiveUser();
+    setActiveUser(null);
     setUserIsLoggedIn(false);
     localStorage.clear();
   };
@@ -43,10 +43,12 @@ function App() {
   }
 
   useEffect(() => {
-    getAllLocations().then((data) => {
-      setAllLocations(data);
-    });
-  }, []);
+    if (userIsLoggedIn) {
+      getAllLocations(activeUser).then((data) => {
+        setAllLocations(data);
+      });
+    }
+  }, [activeUser, userIsLoggedIn]);
 
   function onSearchSubmit(finalSearch) {
     setSearchFilter(true);
@@ -111,8 +113,6 @@ function App() {
     localStorage.setItem("userIsManager", data[0].userIsManager);
     localStorage.setItem("userIsAdmin", data[0].userIsAdmin);
   }
-
-  console.log(userIsLoggedIn);
 
   return (
     <div className="root-wrapper">
