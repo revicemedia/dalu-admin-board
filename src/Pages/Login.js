@@ -91,8 +91,13 @@ function Login({ onLoginSuccess }) {
               </InputAdornment>
             }
           />
-          {emailValue && passwordValue !== "" ? (
-            <Button variant="contained" type="submit" fullWidth>
+          {emailValue.length && passwordValue.length !== 0 ? (
+            <Button
+              variant="contained"
+              type="submit"
+              fullWidth
+              className="Button-additions"
+            >
               Login
             </Button>
           ) : (

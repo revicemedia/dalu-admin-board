@@ -41,6 +41,11 @@ h4 {
   background-color: var(--primary-blue) !important;
 }
 
+.Button-additions-outlined {
+  border: 1px solid var(--primary-blue) !important;
+  color: var(--primary-blue) !important;
+}
+
 .Button-additions-disabled {
   background-color: var(--main-lightgray) !important;
   color: #3d3d3d !important;

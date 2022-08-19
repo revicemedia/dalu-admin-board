@@ -60,9 +60,9 @@ function Sidebar({ activeTab, activeUser, onHandleActiveTab }) {
               src={AddLocationIcon}
               alt="Icon"
             />
-            <StyledPTag>Hinzufügen</StyledPTag>
+            <StyledPTag>Nachrichten</StyledPTag>
           </StyledLink>
-          <StyledLink
+          {/* <StyledLink
             onClick={() => handleActiveTab(5)}
             activeTab={activeTab === 5}
           >
@@ -83,7 +83,7 @@ function Sidebar({ activeTab, activeUser, onHandleActiveTab }) {
               alt="Icon"
             />
             <StyledPTag>Logout</StyledPTag>
-          </StyledLink>
+          </StyledLink> */}
         </NavigationWrapper>
       </MainWrapper>
     </div>
@@ -91,7 +91,6 @@ function Sidebar({ activeTab, activeUser, onHandleActiveTab }) {
 }
 
 const MainWrapper = styled.div`
-  position: relative;
   width: auto;
   max-width: 300px;
   display: flex;
@@ -123,11 +122,10 @@ const NavigationWrapper = styled.div`
 `;
 
 const StyledLink = styled.div`
-  width: 80%;
+  width: 100%;
   padding: 10px 10px;
-  background-color: #113042;
-  color: #fff;
-  border-radius: 5px;
+  color: #113042;
+  border-left: 4px solid #113042;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -135,15 +133,13 @@ const StyledLink = styled.div`
   ${({ activeTab }) =>
     !activeTab &&
     `
-    background-color: #fff;
-    color: #3d3d3d;
+    border-left: 4px solid #fff;
   `};
   &:hover {
-    background-color: #113042;
-    color: #fff;
+    background-color: #eeeeee;
+
     .LinkImage {
-      filter: invert(48%) sepia(30%) saturate(90%) hue-rotate(86deg)
-        brightness(100%) contrast(119%);
+      opacity: 1 !important;
     }
   }
 `;
@@ -153,8 +149,11 @@ const LinkImage = styled.img`
   ${({ activeTab }) =>
     !activeTab &&
     `
-    filter: invert(48%) sepia(30%) saturate(50%) hue-rotate(86deg) brightness(100%) contrast(119%);
+    opacity: .6;
   `};
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 const StyledPTag = styled.p`

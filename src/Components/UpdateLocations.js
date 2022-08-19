@@ -2,17 +2,29 @@ import "../App.css";
 import "../index.css";
 import { useState } from "react";
 import Button from "@mui/material/Button";
-import Chip from "@mui/material/Chip";
 import TextField from "@mui/material/TextField";
+import Chip from "@mui/material/Chip";
 import styled from "styled-components";
+import KontaktDialog from "./KontaktDialog";
 
 function UpdatePage({ allLocations, onSearchSubmit }) {
-  const [searchValue, setSearchValue] = useState();
+  const [searchValue, setSearchValue] = useState("");
+  const [dialogIsOpen, setDialogIsOpen] = useState(false);
+  const [activeLocation, setActiveLocation] = useState(null);
 
   const handleSearchChange = (e) => {
     e.preventDefault();
     setSearchValue(e.target.value);
     onSearchSubmit(e.target.value);
+  };
+
+  const openModal = (location) => {
+    setActiveLocation(location);
+    setDialogIsOpen(true);
+  };
+
+  const onCloseClick = () => {
+    setDialogIsOpen(false);
   };
 
   return (
@@ -35,41 +47,55 @@ function UpdatePage({ allLocations, onSearchSubmit }) {
         <ResultsWrapper>
           {allLocations.map((location) => (
             <LocationCompleteWrapper key={location.locationId}>
-              <StyledLocationImage>
-                <LocationImage
-                  src={
-                    "https://dalu-api-delivery-service.com/image-uploads/" +
-                    location.locationId
-                  }
-                  alt={location.locationName + " Image"}
-                />
-                {location.locationIsActive === "true" ? (
-                  <Chip
-                    label="Active"
-                    color="success"
-                    className="ChipStyling ChipColor"
-                  />
-                ) : (
-                  <Chip
-                    color="error"
-                    label="Inactive"
-                    className="ChipStyling"
-                  />
-                )}
-              </StyledLocationImage>
               <LocationDataContent>
-                <h3>{location.locationName}</h3>
-                <p>
-                  <strong>Typ: </strong> {location.locationType}
-                </p>
-                <p>
-                  <strong>Status: </strong> {location.locationStatus}
-                </p>
-                <br />
-                <Button variant="outlined">Bearbeiten</Button>
+                <div>
+                  <StyledEditHeadline>
+                    {location.locationName}
+                  </StyledEditHeadline>
+                  <p>{location.locationCity}</p>
+                </div>
+                <div>
+                  {location.locationIsActive === "true" ? (
+                    <Chip
+                      variant="outlined"
+                      color="success"
+                      size="small"
+                      label="Aktiv"
+                    />
+                  ) : (
+                    <Chip
+                      variant="outlined"
+                      color="error"
+                      size="small"
+                      label="Inaktiv"
+                    />
+                  )}
+                </div>
               </LocationDataContent>
+              <StyledButtonWrapper>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  className="Button-additions"
+                  onClick={() => openModal(location)}
+                >
+                  Kontakt
+                </Button>
+                <Button
+                  fullWidth
+                  variant="outlined"
+                  className="Button-additions-outlined"
+                >
+                  Bearbeiten
+                </Button>
+              </StyledButtonWrapper>
             </LocationCompleteWrapper>
           ))}
+          <KontaktDialog
+            dialogIsOpen={dialogIsOpen}
+            onCloseClick={onCloseClick}
+            activeLocation={activeLocation}
+          />
         </ResultsWrapper>
       )}
       {console.log(allLocations)}
@@ -77,8 +103,24 @@ function UpdatePage({ allLocations, onSearchSubmit }) {
   );
 }
 
+const StyledEditHeadline = styled.p`
+  font-weight: 400;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+`;
+
+const StyledButtonWrapper = styled.div`
+  width: 100%;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+
+  @media screen and (max-width: 800px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
 const UpdateWrapper = styled.div`
-  position: relative;
   width: auto;
   max-width: 100%;
 `;
@@ -86,8 +128,8 @@ const UpdateWrapper = styled.div`
 const SearchWrapper = styled.div`
   width: 100%;
   background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
+  padding: 20px 20px;
+  border-radius: 4px;
   display: grid;
   grid-template-columns: 1fr;
   gap: 10px;
@@ -95,11 +137,16 @@ const SearchWrapper = styled.div`
 
 const LocationCompleteWrapper = styled.div`
   background-color: #fff;
-  border-radius: 5px;
-  padding: 10px;
+  border-radius: 4px;
+  padding: 20px;
   display: grid;
-  grid-template-rows: 1fr auto;
+  grid-template-columns: 1fr;
   gap: 10px;
+  cursor: default;
+
+  &:hover {
+    box-shadow: 0 0 5px 2px #dedede;
+  }
 `;
 
 const ResultsWrapper = styled.div`
@@ -113,42 +160,20 @@ const ResultsWrapper = styled.div`
   @media screen and (min-width: 1600px) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
-`;
 
-const StyledLocationImage = styled.div`
-  width: 100%;
-  min-width: 100%;
-  height: auto;
-  object-fit: cover;
-  overflow: hidden;
-  border-radius: 2.5px;
-  position: relative;
+  @media screen and (max-width: 1000px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media screen and (max-width: 762px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const LocationDataContent = styled.div`
   width: 100%;
-`;
-
-const LocationImage = styled.img`
-  max-height: 250px;
-  /* @media screen and (max-width: 1500px) {
-    max-height: 300px;
-  }
-  @media screen and (max-width: 1300px) {
-    max-height: 250px;
-  } */
-  @media screen and (max-width: 1100px) {
-    max-height: 200px;
-  }
-  @media screen and (max-width: 1000px) {
-    max-height: 150px;
-  }
-  @media screen and (min-width: 2000px) {
-    max-height: 700px;
-  }
-  @media screen and (min-width: 1800px) {
-    max-height: 400px;
-  }
+  display: grid;
+  grid-template-columns: 1fr auto;
 `;
 
 export default UpdatePage;
