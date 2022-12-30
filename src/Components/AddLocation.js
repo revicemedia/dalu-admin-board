@@ -1,6 +1,6 @@
 import "../App.css";
 import "../index.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "@mui/material/Button";
 import { locationTypes } from "../helper/location-list";
 import { initialStati } from "../helper/initialStatus-list";
@@ -17,8 +17,8 @@ function AddLocation() {
   const [locationType, setLocationType] = useState("Bar");
   const [locationStatus, setLocationStatus] = useState("green");
   const [userToggle, setUserToggle] = useState(false);
-  const [locationCity, setLocationCity] = useState();
-  const [locationStreet, setLocationStreet] = useState();
+  // const [locationCity, setLocationCity] = useState();
+  // const [locationStreet, setLocationStreet] = useState();
   const [locationName, setLocationName] = useState();
 
   const handleUserToggle = () => {
@@ -29,13 +29,13 @@ function AddLocation() {
     setLocationName(e.target.value);
   };
 
-  const handleLocationCityChange = (e) => {
-    setLocationCity(e.target.value);
-  };
+  // const handleLocationCityChange = (e) => {
+  //   setLocationCity(e.target.value);
+  // };
 
-  const handleLocationStreetChange = (e) => {
-    setLocationStreet(e.target.value);
-  };
+  // const handleLocationStreetChange = (e) => {
+  //   setLocationStreet(e.target.value);
+  // };
 
   const handleUpload = (event) => {
     // setImage(URL.createObjectURL(event.target.files[0]));
