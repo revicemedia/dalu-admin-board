@@ -10,3 +10,12 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+
+.NavBarLink {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #113042;
+}
+
+.InputSearchCustomization {
+}

@@ -1,22 +1,65 @@
 import "../App.css";
 import "../index.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Chip from "@mui/material/Chip";
 import styled from "styled-components";
 import KontaktDialog from "./KontaktDialog";
+import StyledNav from "./StyledNav";
 
-function UpdatePage({ allLocations, onSearchSubmit }) {
+function UpdatePage({ allLocations, activeUser, onLogoutClick }) {
   const [searchValue, setSearchValue] = useState("");
   const [dialogIsOpen, setDialogIsOpen] = useState(false);
   const [activeLocation, setActiveLocation] = useState(null);
+  const [searchFilter, setSearchFilter] = useState(false);
+  const [filteredLocations, setFilteredLocations] = useState([]);
+  const [locations, setLocations] = useState([]);
 
   const handleSearchChange = (e) => {
     e.preventDefault();
     setSearchValue(e.target.value);
     onSearchSubmit(e.target.value);
   };
+
+  useEffect(() => {
+    if (searchFilter) {
+      setLocations(filteredLocations);
+    } else {
+      setLocations(allLocations);
+    }
+  }, [allLocations, filteredLocations, searchFilter]);
+
+  function onSearchSubmit(finalSearch) {
+    setSearchFilter(true);
+    if (finalSearch !== "") {
+      setFilteredLocations(
+        allLocations.filter(
+          (loc) =>
+            loc.locationName
+              .toLowerCase()
+              .includes(finalSearch.toLowerCase()) ||
+            loc.locationCity
+              .toLowerCase()
+              .includes(finalSearch.toLowerCase()) ||
+            loc.locationPostal
+              .toLowerCase()
+              .includes(finalSearch.toLowerCase()) ||
+            loc.locationInfoText
+              .toLowerCase()
+              .includes(finalSearch.toLowerCase()) ||
+            loc.userMail.toLowerCase().includes(finalSearch.toLowerCase()) ||
+            loc.locationType.toLowerCase().includes(finalSearch.toLowerCase())
+        )
+      );
+      if (filteredLocations.length === 1) {
+        setSearchFilter(true);
+      }
+    } else {
+      setSearchFilter(false);
+      setFilteredLocations([]);
+    }
+  }
 
   const openModal = (location) => {
     setActiveLocation(location);
@@ -28,78 +71,79 @@ function UpdatePage({ allLocations, onSearchSubmit }) {
   };
 
   return (
-    <UpdateWrapper>
-      <SearchWrapper>
-        <TextField
-          id="searchLocations"
-          value={searchValue}
-          onChange={handleSearchChange}
-          className="InputSearchCustomization"
-          placeholder="Location, Anschrift o.ä. suchen"
-          variant="outlined"
-          fullWidth
-        />
-        {/* <Button variant="contained" type="submit" className="Button-additions">
-          Suchen
-        </Button> */}
-      </SearchWrapper>
-      {allLocations && (
-        <ResultsWrapper>
-          {allLocations.map((location) => (
-            <LocationCompleteWrapper key={location.locationId}>
-              <LocationDataContent>
-                <div>
-                  <StyledEditHeadline>
-                    {location.locationName}
-                  </StyledEditHeadline>
-                  <p>{location.locationCity}</p>
-                </div>
-                <div>
-                  {location.locationIsActive === "true" ? (
-                    <Chip
-                      variant="outlined"
-                      color="success"
-                      size="small"
-                      label="Aktiv"
-                    />
-                  ) : (
-                    <Chip
-                      variant="outlined"
-                      color="error"
-                      size="small"
-                      label="Inaktiv"
-                    />
-                  )}
-                </div>
-              </LocationDataContent>
-              <StyledButtonWrapper>
-                <Button
-                  fullWidth
-                  variant="contained"
-                  className="Button-additions"
-                  onClick={() => openModal(location)}
-                >
-                  Kontakt
-                </Button>
-                <Button
-                  fullWidth
-                  variant="outlined"
-                  className="Button-additions-outlined"
-                >
-                  Bearbeiten
-                </Button>
-              </StyledButtonWrapper>
-            </LocationCompleteWrapper>
-          ))}
-          <KontaktDialog
-            dialogIsOpen={dialogIsOpen}
-            onCloseClick={onCloseClick}
-            activeLocation={activeLocation}
+    <>
+      <StyledNav activeUser={activeUser} onLogoutClick={onLogoutClick} />
+      <UpdateWrapper>
+        <SearchWrapper>
+          <TextField
+            id="searchLocations"
+            value={searchValue}
+            onChange={handleSearchChange}
+            className="InputSearchCustomization"
+            placeholder="Location, Anschrift o.ä. suchen"
+            variant="outlined"
+            fullWidth
+            autocomplete="off"
           />
-        </ResultsWrapper>
-      )}
-      {console.log(allLocations)}
-    </UpdateWrapper>
+        </SearchWrapper>
+        {locations && (
+          <ResultsWrapper>
+            {locations.map((location) => (
+              <LocationCompleteWrapper key={location.locationId}>
+                <LocationDataContent>
+                  <div>
+                    <StyledEditHeadline>
+                      {location.locationName}
+                    </StyledEditHeadline>
+                    <p>{location.locationCity}</p>
+                  </div>
+                  <div>
+                    {location.locationIsActive === "true" ? (
+                      <Chip
+                        variant="outlined"
+                        color="success"
+                        size="small"
+                        label="Aktiv"
+                      />
+                    ) : (
+                      <Chip
+                        variant="outlined"
+                        color="error"
+                        size="small"
+                        label="Inaktiv"
+                      />
+                    )}
+                  </div>
+                </LocationDataContent>
+                <StyledButtonWrapper>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    className="Button-additions"
+                    onClick={() => openModal(location)}
+                  >
+                    Kontakt
+                  </Button>
+                  <Button
+                    fullWidth
+                    variant="outlined"
+                    className="Button-additions-outlined"
+                    onClick={() => openModal(location)}
+                  >
+                    Bearbeiten
+                  </Button>
+                </StyledButtonWrapper>
+              </LocationCompleteWrapper>
+            ))}
+            <KontaktDialog
+              dialogIsOpen={dialogIsOpen}
+              onCloseClick={onCloseClick}
+              activeLocation={activeLocation}
+            />
+          </ResultsWrapper>
+        )}
+      </UpdateWrapper>
+    </>
   );
 }
 
@@ -122,17 +166,20 @@ const StyledButtonWrapper = styled.div`
 
 const UpdateWrapper = styled.div`
   width: auto;
-  max-width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-top: 40px;
 `;
 
 const SearchWrapper = styled.div`
   width: 100%;
-  background-color: #fff;
+  background-color: #f3f2f2;
   padding: 20px 20px;
   border-radius: 4px;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
 `;
 
 const LocationCompleteWrapper = styled.div`
@@ -150,7 +197,6 @@ const LocationCompleteWrapper = styled.div`
 `;
 
 const ResultsWrapper = styled.div`
-  margin-top: 10px;
   width: 100%;
   height: auto;
   display: grid;
@@ -158,7 +204,7 @@ const ResultsWrapper = styled.div`
   gap: 10px;
 
   @media screen and (min-width: 1600px) {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 
   @media screen and (max-width: 1000px) {
