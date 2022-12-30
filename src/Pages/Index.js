@@ -3,7 +3,6 @@ import "../index.css";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { getAllLocations } from "../functions/getLocations.js";
-import UpdatePage from "../Components/UpdateLocations";
 import AddLocation from "../Components/AddLocation";
 import Map from "../Components/Map";
 import StyledNav from "../Components/StyledNav";
@@ -18,6 +17,8 @@ function Index({ activeUser, onLogoutClick }) {
       getAllLocations(activeUser).then((data) => {
         setAllLocations(data);
       });
+    } else {
+      setUserIsLoggedIn(false);
     }
   }, [activeUser, userIsLoggedIn]);
 

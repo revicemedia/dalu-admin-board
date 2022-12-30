@@ -10,6 +10,8 @@ function Map() {
     lng: 7.5185153,
   });
 
+  console.log(setCenter);
+
   return (
     <>
       <StyledWrapper id="map">
