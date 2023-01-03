@@ -12,6 +12,8 @@ function Map() {
   });
   const [allActiveLocations, setAllActiveLocations] = useState([]);
 
+  console.log(setCenter);
+
   useEffect(() => {
     getAllLocations().then((data) => {
       setAllActiveLocations(data);

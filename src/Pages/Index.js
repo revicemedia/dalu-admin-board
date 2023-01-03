@@ -1,25 +1,11 @@
 import "../App.css";
 import "../index.css";
 import styled from "styled-components";
-import { useState, useEffect } from "react";
-import { getAllLocations } from "../functions/getLocations.js";
 import StyledNav from "../Components/StyledNav";
 import { Link } from "react-router-dom";
 
 function Index({ activeUser, onLogoutClick }) {
   // const [activeUser, setActiveUser] = useState();
-  const [allLocations, setAllLocations] = useState();
-  const [userIsLoggedIn, setUserIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    if (userIsLoggedIn) {
-      getAllLocations(activeUser).then((data) => {
-        setAllLocations(data);
-      });
-    } else {
-      setUserIsLoggedIn(false);
-    }
-  }, [activeUser, userIsLoggedIn]);
 
   return (
     <div className="root-wrapper">

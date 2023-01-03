@@ -5,7 +5,6 @@ import Button from "@mui/material/Button";
 import { locationTypes } from "../helper/location-list";
 import { initialStati } from "../helper/initialStatus-list";
 import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
 import styled from "styled-components";
 import UploadIcon from "@mui/icons-material/Upload";
 import MenuItem from "@mui/material/MenuItem";

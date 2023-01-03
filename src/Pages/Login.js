@@ -10,7 +10,6 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import Alert from "@mui/material/Alert";
-import DaLuLogo from "../svgs/dalu-logo.svg";
 import StyledNav from "../Components/StyledNav";
 
 function Login({ onLoginSuccess }) {
