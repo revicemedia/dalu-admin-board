@@ -7,6 +7,7 @@ import Chip from "@mui/material/Chip";
 import styled from "styled-components";
 import KontaktDialog from "./KontaktDialog";
 import StyledNav from "./StyledNav";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function UpdatePage({ allLocations, activeUser, onLogoutClick }) {
   const [searchValue, setSearchValue] = useState("");
@@ -85,7 +86,7 @@ function UpdatePage({ allLocations, activeUser, onLogoutClick }) {
             fullWidth
           />
         </SearchWrapper>
-        {locations && (
+        {locations ? (
           <ResultsWrapper>
             {locations.map((location) => (
               <LocationCompleteWrapper key={location.locationId}>
@@ -140,6 +141,10 @@ function UpdatePage({ allLocations, activeUser, onLogoutClick }) {
               activeLocation={activeLocation}
             />
           </ResultsWrapper>
+        ) : (
+          <LoaderWrapper>
+            <CircularProgress />
+          </LoaderWrapper>
         )}
       </UpdateWrapper>
     </>
@@ -150,6 +155,13 @@ const StyledEditHeadline = styled.p`
   font-weight: 400;
   font-size: 1.3rem;
   margin-bottom: 10px;
+`;
+
+const LoaderWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 `;
 
 const StyledButtonWrapper = styled.div`
