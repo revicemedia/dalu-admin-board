@@ -11,6 +11,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import Alert from "@mui/material/Alert";
 import DaLuLogo from "../svgs/dalu-logo.svg";
+import StyledNav from "../Components/StyledNav";
 
 function Login({ onLoginSuccess }) {
   const [activeUser, setActiveUser] = useState("");
@@ -50,7 +51,6 @@ function Login({ onLoginSuccess }) {
       if (data) {
         setActiveUser(data);
         setLoginError(false);
-        console.log(data[0]);
         onLoginSuccess(data);
       } else {
         setLoginError(true);
@@ -59,7 +59,7 @@ function Login({ onLoginSuccess }) {
   }
   return (
     <LoginPage>
-      <StyledDaLuLogo src={DaLuLogo} alt="DaLu Logo" />
+      <StyledNav />
       <LoginOuterWrapper>
         <LoginWrapper onSubmit={tryLogin}>
           <TextField
@@ -118,16 +118,8 @@ const LoginPage = styled.div`
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  object-fit: cover;
   background-color: #eeeeee;
-`;
-
-const StyledDaLuLogo = styled.img`
-  width: 100px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 40px;
+  position: static;
 `;
 
 const LoginOuterWrapper = styled.div`
@@ -151,6 +143,11 @@ const LoginWrapper = styled.form`
   grid-template-rows: 1fr 1fr 1fr;
   gap: 10px;
   background-color: #fff;
+
+  @media screen and (max-width: 420px) {
+    max-width: calc(100vw 20px);
+    min-width: calc(100vw - 20px);
+  }
 `;
 
 export default Login;

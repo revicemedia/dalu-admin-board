@@ -83,7 +83,6 @@ function UpdatePage({ allLocations, activeUser, onLogoutClick }) {
             placeholder="Location, Anschrift o.ä. suchen"
             variant="outlined"
             fullWidth
-            autocomplete="off"
           />
         </SearchWrapper>
         {locations && (
@@ -168,7 +167,16 @@ const UpdateWrapper = styled.div`
   width: auto;
   max-width: 1120px;
   margin: 0 auto;
-  padding-top: 40px;
+  padding-top: 138px;
+
+  @media screen and (max-width: 1140px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  @media screen and (max-width: 640px) {
+    padding-top: 104px;
+  }
 `;
 
 const SearchWrapper = styled.div`
@@ -179,7 +187,7 @@ const SearchWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0;
+  margin: 0 0 20px 0;
 `;
 
 const LocationCompleteWrapper = styled.div`
@@ -190,9 +198,11 @@ const LocationCompleteWrapper = styled.div`
   grid-template-columns: 1fr;
   gap: 10px;
   cursor: default;
+  border: 1px dashed #dedede;
 
   &:hover {
     box-shadow: 0 0 5px 2px #dedede;
+    border: 1px dashed #fff;
   }
 `;
 
@@ -202,6 +212,7 @@ const ResultsWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
+  padding-bottom: 60px;
 
   @media screen and (min-width: 1600px) {
     grid-template-columns: 1fr 1fr 1fr;

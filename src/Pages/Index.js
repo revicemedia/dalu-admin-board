@@ -3,9 +3,8 @@ import "../index.css";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { getAllLocations } from "../functions/getLocations.js";
-import AddLocation from "../Components/AddLocation";
-import Map from "../Components/Map";
 import StyledNav from "../Components/StyledNav";
+import { Link } from "react-router-dom";
 
 function Index({ activeUser, onLogoutClick }) {
   // const [activeUser, setActiveUser] = useState();
@@ -26,12 +25,20 @@ function Index({ activeUser, onLogoutClick }) {
     <div className="root-wrapper">
       <MainWrapper>
         <StyledNav activeUser={activeUser} onLogoutClick={onLogoutClick} />
-        <RightWrapper>
-          <ContentWrapper>
-            <AddLocation allLocations={allLocations} />
-            <Map allLocations={allLocations} />
-          </ContentWrapper>
-        </RightWrapper>
+        <DashboardWrapper>
+          <Link className="DashboardLink" to="/">
+            Dashboard
+          </Link>
+          <Link className="DashboardLink" to="/bearbeiten">
+            Bearbeiten
+          </Link>
+          <Link className="DashboardLink" to="/hinzufuegen">
+            Hinzufügen
+          </Link>
+          <Link className="DashboardLink" to="/karte">
+            Karte
+          </Link>
+        </DashboardWrapper>
       </MainWrapper>
     </div>
   );
@@ -43,16 +50,31 @@ const MainWrapper = styled.div`
   background: #fff;
 `;
 
-const RightWrapper = styled.div`
+const DashboardWrapper = styled.div`
   height: auto;
   width: auto;
   max-width: 1120px;
   margin: 0 auto;
-`;
+  padding-top: 138px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 20px;
 
-const ContentWrapper = styled.div`
-  height: 100%;
-  overflow: hidden;
+  @media screen and (max-width: 690px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media screen and (max-width: 420px) {
+    grid-template-columns: 1fr;
+  }
+
+  @media screen and (max-width: 1140px) {
+    padding: 138px 10px;
+  }
+
+  @media screen and (max-width: 640px) {
+    padding-top: 104px;
+  }
 `;
 
 export default Index;

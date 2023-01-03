@@ -15,7 +15,85 @@ body {
   margin: 0 10px;
   text-decoration: none;
   color: #113042;
+  border-bottom: 2px solid #fff;
+  padding: 5px 0 10px 0;
 }
 
-.InputSearchCustomization {
+.NavBarLink_Active {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #113042;
+  border-bottom: 2px solid #113042;
+  padding: 5px 0 10px 0;
+  /* padding: 5px 0; */
+}
+
+.NavbarAvatar {
+  width: 30px !important;
+  height: 30px !important;
+  font-size: 0.9rem !important;
+  border: 1px dashed #113042;
+  background-color: #113042 !important;
+  color: #fff !important;
+}
+
+.LogoutButtonStyling {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.DashboardLink {
+  width: 100%;
+  height: auto;
+  min-height: 200px;
+  background-color: #113042;
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px 20px 20px 20px;
+  border-radius: 4px;
+  background-color: #3790af;
+  background-image: linear-gradient(62deg, #113042 0%, #3790af 100%);
+  transition: all 0.5s;
+}
+
+.DashboardLink:nth-of-type(2) {
+  background: #485563;
+  background: -webkit-linear-gradient(to right, #29323c, #485563);
+  background: linear-gradient(to right, #29323c, #485563);
+}
+
+.DashboardLink:nth-of-type(3) {
+  background: #232526; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #232526,
+    #414345
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #232526,
+    #414345
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.DashboardLink:nth-of-type(4) {
+  background: #606c88;
+  background: -webkit-linear-gradient(to right, #3f4c6b, #606c88);
+  background: linear-gradient(to right, #3f4c6b, #606c88);
+}
+
+.DashboardLink:hover {
+  transform: scale(1.03);
+  padding: 20px 20px 30px 30px;
+}
+
+.MarkerIdee {
+  width: 30px;
+  height: 30px;
+  background-color: red;
+  border-radius: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
 }

@@ -6,6 +6,8 @@ import Index from "./Pages/Index.js";
 import Login from "./Pages/Login";
 import { getAllLocations } from "./functions/getLocations.js";
 import UpdatePage from "./Components/UpdateLocations";
+import AddPage from "./Pages/Add";
+import MapComponent from "./Pages/Map";
 
 export default function App() {
   const [activeUser, setActiveUser] = useState();
@@ -86,6 +88,26 @@ export default function App() {
                 />
               }
             />
+            <Route
+              path="/hinzufuegen"
+              element={
+                <AddPage
+                  activeUser={activeUser}
+                  onLogoutClick={onLogoutClick}
+                />
+              }
+            />
+            {activeUser.userIsManager === `true` && (
+              <Route
+                path="/karte"
+                element={
+                  <MapComponent
+                    activeUser={activeUser}
+                    onLogoutClick={onLogoutClick}
+                  />
+                }
+              />
+            )}
           </>
         ) : (
           <Route path="*" element={<Login onLoginSuccess={onLoginSuccess} />} />

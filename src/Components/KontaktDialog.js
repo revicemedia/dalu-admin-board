@@ -37,15 +37,17 @@ function KontaktDialog({ dialogIsOpen, onCloseClick, activeLocation }) {
 const StyledOverlay = styled.div`
   left: 0;
   top: 0;
-  position: absolute;
+  bottom: 0;
+  position: fixed;
   background-color: rgba(0, 0, 0, 0.3);
-  width: 100%;
-  height: 100%;
+  backdrop-filter: blur(5px);
+  width: 100vw;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: no-drop;
-  z-index: 1;
+  z-index: 4000;
 `;
 const OverlayWrapper = styled.div`
   border-radius: 4px;
