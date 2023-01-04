@@ -17,7 +17,6 @@ function Map() {
   useEffect(() => {
     getAllLocations().then((data) => {
       setAllActiveLocations(data);
-      console.log(data);
     });
   }, []);
 

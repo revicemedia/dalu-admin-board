@@ -1,4 +1,4 @@
 export const getAllLocations = () =>
   fetch("https://dalu-api-delivery-service.com/getActiveRestaurants").then(
-    (response) => response.json()
+    (response) => response.json().catch((error) => error.message)
   );
