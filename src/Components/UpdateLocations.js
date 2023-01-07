@@ -8,6 +8,7 @@ import styled from "styled-components";
 import KontaktDialog from "./KontaktDialog";
 import StyledNav from "./StyledNav";
 import CircularProgress from "@mui/material/CircularProgress";
+import { Link } from "react-router-dom";
 
 function UpdatePage({ allLocations, activeUser, onLogoutClick }) {
   const [searchValue, setSearchValue] = useState("");
@@ -124,14 +125,12 @@ function UpdatePage({ allLocations, activeUser, onLogoutClick }) {
                   >
                     Kontakt
                   </Button>
-                  <Button
-                    fullWidth
-                    variant="outlined"
+                  <Link
+                    to={"/bearbeiten/location/" + location.locationId}
                     className="Button-additions-outlined"
-                    onClick={() => openModal(location)}
                   >
                     Bearbeiten
-                  </Button>
+                  </Link>
                 </StyledButtonWrapper>
               </LocationCompleteWrapper>
             ))}

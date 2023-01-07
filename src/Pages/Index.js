@@ -12,8 +12,8 @@ function Index({ activeUser, onLogoutClick }) {
       <MainWrapper>
         <StyledNav activeUser={activeUser} onLogoutClick={onLogoutClick} />
         <DashboardWrapper>
-          <Link className="DashboardLink" to="/">
-            Dashboard
+          <Link className="DashboardLink" to="/support">
+            Kontakt
           </Link>
           <Link className="DashboardLink" to="/bearbeiten">
             Bearbeiten

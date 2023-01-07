@@ -86,7 +86,9 @@ export default function StyledNav({ activeUser, onLogoutClick }) {
           </Link>
           <Link
             className={
-              location.pathname === "/bearbeiten"
+              location.pathname === "/bearbeiten" ||
+              location.pathName === "/bearbeiten/location" ||
+              location.pathName === "/bearbeiten/location/:id"
                 ? "NavBarLink_Active"
                 : "NavBarLink"
             }

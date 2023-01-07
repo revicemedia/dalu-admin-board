@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import GoogleMapReact from "google-map-react";
 import { getAllLocations } from "../functions/getActiveLocations";
+import RestaurantIcon from "../svgs/restaurant_menu_black_24dp.svg";
+import CafeIcon from "../svgs/coffee_black_24dp.svg";
+import BarIcon from "../svgs/local_bar_black_24dp.svg";
 
 function Map() {
   const [center, setCenter] = useState({
@@ -20,6 +23,10 @@ function Map() {
     });
   }, []);
 
+  const markerClick = (marker) => {
+    console.log(marker);
+  };
+
   return (
     <>
       <StyledWrapper id="map">
@@ -29,17 +36,6 @@ function Map() {
           gestureHandling={"greedy"}
           center={center}
         >
-          {/* {allActiveLocations.map((marker, index) => (
-            <div
-              className="MarkerIdee"
-              lat={marker.locationLat}
-              lng={marker.locationLng}
-              text={marker.locationName}
-              key={index}
-            >
-              Test
-            </div>
-          ))} */}
           {allActiveLocations.map((marker, index) => (
             <div
               className="MarkerIdee"
@@ -47,6 +43,7 @@ function Map() {
               lng={marker.locationLng}
               text={marker.locationName}
               key={index}
+              onClick={() => markerClick(marker)}
             >
               <div
                 className={
@@ -59,7 +56,7 @@ function Map() {
                     : ""
                 }
               ></div>
-              {/* <img
+              <img
                 src={
                   marker.locationType === "restaurant"
                     ? RestaurantIcon
@@ -70,7 +67,7 @@ function Map() {
                     : ""
                 }
                 alt="Location type icon"
-              /> */}
+              />
             </div>
           ))}
         </GoogleMapReact>

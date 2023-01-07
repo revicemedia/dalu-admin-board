@@ -25,7 +25,6 @@ body {
   color: #113042;
   border-bottom: 2px solid #113042;
   padding: 5px 0 10px 0;
-  /* padding: 5px 0; */
 }
 
 .NavbarAvatar {
@@ -82,10 +81,54 @@ body {
 }
 
 .MarkerIdee {
-  width: 30px;
-  height: 30px;
-  background-color: red;
   position: absolute;
-  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  box-sizing: content-box;
+  top: 50%;
+  left: 50%;
+  width: 25px;
+  height: 25px;
+  background-color: var(--main-white);
+  border: 3px solid var(--primary-blue);
   border-radius: 50%;
+  user-select: none;
+  transform: translate(-50%, -50%);
+}
+
+.MarkerIdee::before {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: var(--main-green);
+}
+
+.StatusMarker {
+  border-radius: 50%;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: 3px solid var(--primary-blue);
+  top: -5px;
+  right: -5px;
+}
+
+.Badge {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.BadgeGreen {
+  background-color: var(--main-green);
+}
+
+.BadgeYellow {
+  background-color: var(--main-yellow);
+}
+
+.BadgeRed {
+  background-color: var(--main-red);
 }
