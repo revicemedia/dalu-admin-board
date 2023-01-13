@@ -54,9 +54,9 @@ export default function StyledNav({ activeUser, onLogoutClick }) {
                       : "Nicht angemeldet"}
                   </StyledH4>
                   <StyledAdminManager>
-                    {activeUser.userIsManager
+                    {activeUser.userIsManager === "true"
                       ? "Manager"
-                      : activeUser.userIsAdmin
+                      : activeUser.userIsAdmin === "true"
                       ? "Admin"
                       : "Rolle"}
                   </StyledAdminManager>

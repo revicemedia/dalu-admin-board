@@ -55,6 +55,7 @@ const LoaderWrapper = styled.div`
   width: 100%;
   align-items: center;
   justify-content: center;
+  padding-top: 138px;
 `;
 
 const RightWrapper = styled.div`

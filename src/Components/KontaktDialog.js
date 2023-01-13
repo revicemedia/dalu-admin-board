@@ -3,11 +3,16 @@ import "../index.css";
 import styled from "styled-components";
 import * as React from "react";
 import CloseIcon from "../svgs/close_white_24dp.svg";
+import { useEffect } from "react";
 
 function KontaktDialog({ dialogIsOpen, onCloseClick, activeLocation }) {
   const onSetCloseClick = () => {
     onCloseClick();
   };
+
+  useEffect(() => {
+    console.log(activeLocation);
+  });
 
   return (
     <>

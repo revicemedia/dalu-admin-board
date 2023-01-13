@@ -67,6 +67,13 @@ function AddLocation({ activeUser }) {
     });
   }, [activeUser]);
 
+  const clearForm = () => {
+    setLocationOwnerMail(undefined);
+    setLocationName("");
+    setLocationStatus("green");
+    setLocationType("Bar");
+  };
+
   return (
     <UpdateWrapper>
       <SearchWrapper onSubmit={handleLocationInsert}>
@@ -80,6 +87,70 @@ function AddLocation({ activeUser }) {
             label="Name der Location"
             fullWidth
           />
+
+          {/* Neue Inputs */}
+
+          <TextField
+            id="searchLocations"
+            value={locationName}
+            onChange={handleLocationNameChange}
+            className="InputSearchCustomization"
+            variant="outlined"
+            label="Postleitzahl"
+            fullWidth
+          />
+
+          <TextField
+            id="searchLocations"
+            value={locationName}
+            onChange={handleLocationNameChange}
+            className="InputSearchCustomization"
+            variant="outlined"
+            label="Straße & Hausnr."
+            fullWidth
+          />
+
+          <TextField
+            id="searchLocations"
+            value={locationName}
+            onChange={handleLocationNameChange}
+            className="InputSearchCustomization"
+            variant="outlined"
+            label="Ort"
+            fullWidth
+          />
+
+          <TextField
+            id="searchLocations"
+            value={locationName}
+            onChange={handleLocationNameChange}
+            className="InputSearchCustomization"
+            variant="outlined"
+            label="Stadt"
+            fullWidth
+          />
+
+          <TextField
+            id="searchLocations"
+            value={locationName}
+            onChange={handleLocationNameChange}
+            className="InputSearchCustomization"
+            variant="outlined"
+            label="Latitude"
+            fullWidth
+          />
+
+          <TextField
+            id="searchLocations"
+            value={locationName}
+            onChange={handleLocationNameChange}
+            className="InputSearchCustomization"
+            variant="outlined"
+            label="Longitude"
+            fullWidth
+          />
+
+          {/* Ende neue Inputs */}
           <TextField
             id="select-locationType"
             select
@@ -108,25 +179,6 @@ function AddLocation({ activeUser }) {
               </MenuItem>
             ))}
           </TextField>
-          <label htmlFor="uploadbutton">
-            <Input
-              accept="image/*"
-              id="uploadbutton"
-              type="file"
-              onChange={(event) => {
-                handleUpload(event);
-              }}
-            />
-            <Button
-              className="UploadButton"
-              variant="contained"
-              component="span"
-              fullWidth
-            >
-              {image ? <InsertPhotoOutlinedIcon /> : <UploadIcon />}
-              {image ? image.name : "Hochladen"}
-            </Button>
-          </label>
         </InnerWrapper>
       </SearchWrapper>
       <InnerWrapperTwo>
@@ -160,12 +212,40 @@ function AddLocation({ activeUser }) {
       ) : (
         <InnerWrapperTwo>Ansprechpartner anlegen</InnerWrapperTwo>
       )}
-      <InnerWrapperTwo>
+      <InnerWrapper>
+        <label htmlFor="uploadbutton">
+          <Input
+            accept="image/*"
+            id="uploadbutton"
+            type="file"
+            onChange={(event) => {
+              handleUpload(event);
+            }}
+          />
+          <Button
+            className="UploadButton"
+            variant="contained"
+            component="span"
+            fullWidth
+          >
+            {image ? <InsertPhotoOutlinedIcon /> : <UploadIcon />}
+            {image ? image.name : "Hochladen"}
+          </Button>
+        </label>
+        <Button
+          type="reset"
+          variant="outlined"
+          className="Button-additions-outlined"
+          onClick={clearForm}
+        >
+          Löschen
+        </Button>
         {locationName ? (
           <Button
             variant="contained"
             type="submit"
             className="Button-additions"
+            fullWidth
           >
             Erstellen
           </Button>
@@ -175,11 +255,12 @@ function AddLocation({ activeUser }) {
             type="submit"
             className="Button-additions-disabled"
             disabled
+            fullWidth
           >
             Erstellen
           </Button>
         )}
-      </InnerWrapperTwo>
+      </InnerWrapper>
     </UpdateWrapper>
   );
 }
@@ -204,7 +285,7 @@ const InnerWrapper = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
+  gap: 20px 10px;
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 4px;

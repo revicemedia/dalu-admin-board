@@ -108,17 +108,16 @@ export default function App() {
               }
             />
             <Route path="/support" element={<p>Support</p>} />
-            {activeUser.userIsManager === `true` && (
-              <Route
-                path="/karte"
-                element={
-                  <MapComponent
-                    activeUser={activeUser}
-                    onLogoutClick={onLogoutClick}
-                  />
-                }
-              />
-            )}
+
+            <Route
+              path="/karte"
+              element={
+                <MapComponent
+                  activeUser={activeUser}
+                  onLogoutClick={onLogoutClick}
+                />
+              }
+            />
           </>
         ) : (
           <Route path="*" element={<Login onLoginSuccess={onLoginSuccess} />} />

@@ -44,7 +44,6 @@ h4 {
 .Button-additions-outlined {
   border: 1px solid var(--primary-blue) !important;
   color: var(--primary-blue) !important;
-  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -78,6 +77,7 @@ h4 {
   user-select: none;
   vertical-align: middle;
   -moz-appearance: none;
+  appearance: none;
   -webkit-appearance: none;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -91,6 +91,10 @@ h4 {
   min-width: 64px;
   padding: 6px 16px;
   border-radius: 4px;
+}
+
+.Button-additions-height-56 {
+  height: 56px;
 }
 
 .Button-additions-disabled {
