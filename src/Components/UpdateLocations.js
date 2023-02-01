@@ -9,6 +9,9 @@ import KontaktDialog from "./KontaktDialog";
 import StyledNav from "./StyledNav";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Link } from "react-router-dom";
+import GreenIcon from "../svgs/Icons/check.svg";
+import RedIcon from "../svgs/Icons/cancel.svg";
+import YellowIcon from "../svgs/Icons/error.svg";
 
 function UpdatePage({ allLocations, activeUser, onLogoutClick }) {
   const [searchValue, setSearchValue] = useState("");
@@ -17,6 +20,7 @@ function UpdatePage({ allLocations, activeUser, onLogoutClick }) {
   const [searchFilter, setSearchFilter] = useState(false);
   const [filteredLocations, setFilteredLocations] = useState([]);
   const [locations, setLocations] = useState([]);
+  const [updateComponent, setUpdateComponent] = useState(false);
 
   const handleSearchChange = (e) => {
     e.preventDefault();
@@ -72,6 +76,46 @@ function UpdatePage({ allLocations, activeUser, onLogoutClick }) {
     setDialogIsOpen(false);
   };
 
+  // const updateLocationStatus = (locationStatus, locationId, activeUser) => {
+  //   fetch(
+  //     "https://dalu-api-delivery-service.com/updateUserLocation.php?um=" +
+  //       activeUser.userMail +
+  //       "&ut=" +
+  //       activeUser.userAuthToken +
+  //       "&locationId=" +
+  //       locationId +
+  //       "&locationStatus=" +
+  //       locationStatus
+  //   ).then((response) =>
+  //     response.json().catch((error) => console.log(error.message))
+  //   );
+  // };
+
+  async function updateLocationStatus(locationStatus, locationId, activeUser) {
+    let response = await fetch(
+      "https://dalu-api-delivery-service.com/updateUserLocation.php?um=" +
+        activeUser.userMail +
+        "&ut=" +
+        activeUser.userAuthToken +
+        "&locationId=" +
+        locationId +
+        "&locationStatus=" +
+        locationStatus
+    );
+    let data = await response.json();
+    if (data) {
+      setUpdateComponent(true);
+    } else {
+      setUpdateComponent(false);
+    }
+  }
+
+  useEffect(() => {
+    if (updateComponent) {
+      window.location.reload();
+    }
+  }, [updateComponent]);
+
   return (
     <>
       <StyledNav activeUser={activeUser} onLogoutClick={onLogoutClick} />
@@ -117,14 +161,92 @@ function UpdatePage({ allLocations, activeUser, onLogoutClick }) {
                   </div>
                 </LocationDataContent>
                 <StyledButtonWrapper>
-                  <Button
-                    fullWidth
-                    variant="contained"
-                    className="Button-additions"
-                    onClick={() => openModal(location)}
-                  >
-                    Kontakt
-                  </Button>
+                  {activeUser.userIsManager === "false" ? (
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      className="Button-additions"
+                      onClick={() => openModal(location)}
+                    >
+                      Kontakt
+                    </Button>
+                  ) : (
+                    <StyledStatusButtonWrapper>
+                      <Button
+                        // className="StatusButtonUpdate StatusButtonUpdate-green"
+                        className={
+                          location.locationStatus === "green"
+                            ? "StatusButtonUpdate"
+                            : "StatusButtonUpdate StatusButtonUpdate-green"
+                        }
+                        variant="contained"
+                        disabled={
+                          location.locationStatus === "green" ? true : false
+                        }
+                        onClick={() =>
+                          updateLocationStatus(
+                            "green",
+                            location.locationId,
+                            activeUser
+                          )
+                        }
+                      >
+                        <img
+                          className="IconButtonStatus"
+                          src={GreenIcon}
+                          alt="Icon"
+                        />
+                      </Button>
+                      <Button
+                        className={
+                          location.locationStatus === "yellow"
+                            ? "StatusButtonUpdate"
+                            : "StatusButtonUpdate StatusButtonUpdate-yellow"
+                        }
+                        variant="contained"
+                        disabled={
+                          location.locationStatus === "yellow" ? true : false
+                        }
+                        onClick={() =>
+                          updateLocationStatus(
+                            "yellow",
+                            location.locationId,
+                            activeUser
+                          )
+                        }
+                      >
+                        <img
+                          className="IconButtonStatus"
+                          src={YellowIcon}
+                          alt="Icon"
+                        />
+                      </Button>
+                      <Button
+                        className={
+                          location.locationStatus === "red"
+                            ? "StatusButtonUpdate"
+                            : "StatusButtonUpdate StatusButtonUpdate-red"
+                        }
+                        variant="contained"
+                        disabled={
+                          location.locationStatus === "red" ? true : false
+                        }
+                        onClick={() =>
+                          updateLocationStatus(
+                            "red",
+                            location.locationId,
+                            activeUser
+                          )
+                        }
+                      >
+                        <img
+                          className="IconButtonStatus"
+                          src={RedIcon}
+                          alt="Icon"
+                        />
+                      </Button>
+                    </StyledStatusButtonWrapper>
+                  )}
                   <Link
                     to={"/bearbeiten/location/" + location.locationId}
                     className="Button-additions-outlined"
@@ -154,6 +276,12 @@ const StyledEditHeadline = styled.p`
   font-weight: 400;
   font-size: 1.3rem;
   margin-bottom: 10px;
+`;
+
+const StyledStatusButtonWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
 `;
 
 const LoaderWrapper = styled.div`
@@ -207,7 +335,7 @@ const LocationCompleteWrapper = styled.div`
   padding: 20px;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 10px;
+  gap: 20px;
   cursor: default;
   border: 1px dashed #dedede;
 
@@ -242,6 +370,7 @@ const LocationDataContent = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 1fr auto;
+  gap: 20px;
 `;
 
 export default UpdatePage;

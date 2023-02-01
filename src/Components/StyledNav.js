@@ -162,6 +162,7 @@ const UpperNavBar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  min-height: 74px;
 `;
 
 const BottomNavBar = styled.div`

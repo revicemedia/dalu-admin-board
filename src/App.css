@@ -132,3 +132,22 @@ body {
 .BadgeRed {
   background-color: var(--main-red);
 }
+
+.IconButtonStatus {
+  width: 20px;
+  height: 20px;
+}
+
+.StatusButtonUpdate {
+  padding: 6px 8px !important;
+  min-width: 0px !important;
+}
+.StatusButtonUpdate-green {
+  background-color: #03af52 !important;
+}
+.StatusButtonUpdate-yellow {
+  background-color: #fc9900 !important;
+}
+.StatusButtonUpdate-red {
+  background-color: #d60707 !important;
+}
