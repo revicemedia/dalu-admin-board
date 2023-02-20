@@ -48,9 +48,10 @@ const DashboardWrapper = styled.div`
 
   @media screen and (max-width: 690px) {
     grid-template-columns: 1fr 1fr;
+    gap: 10px;
   }
 
-  @media screen and (max-width: 420px) {
+  @media screen and (max-width: 320px) {
     grid-template-columns: 1fr;
   }
 

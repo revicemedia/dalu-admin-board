@@ -144,7 +144,7 @@ const StyledTopBar = styled.div`
   position: fixed;
 
   @media screen and (max-width: 1140px) {
-    padding: 0 10px;
+    padding: 0 20px;
   }
 `;
 
